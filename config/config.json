@@ -1,10 +1,16 @@
 {
-    "model_type" : "vit",
+    "model_type" : "revit",
     "batch_size": 256,
     "learning_rate": 0.0001,
-    "epochs": 1,
+    "epochs": 310,
     "resize" : 224,
     "patiece" : 10000,
-    "name" : "vit_256"
+    "name" : "256_",
+    "scheduler":{
+        "mode":"True",
+        "T_0":10,
+        "T_mult":2,
+        "eta_min":0.000001
+    }
 }
 

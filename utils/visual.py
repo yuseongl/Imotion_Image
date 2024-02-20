@@ -7,7 +7,7 @@ from pathlib import Path
 # 모델을 평가 모드로 설정
 
 def prf1V(f1s,precisions,recalls,c_f1s,c_precisions,c_recalls ,name, path):
-    classes = ['분노','불안','당황','기쁨','중립','상처','슬픔']
+    classes = ['ang','anx','emb','happy','normal','pain','sad']
     # 정밀도 그래프
     plt.figure(figsize=(8, 5))
     for i in range(len(c_precisions[0])):  # 각 클래스별로
@@ -149,7 +149,28 @@ def accuracyV(accuracies, name, path):
     except FileNotFoundError:
         print("Error: Failed to save accuracy graph.")
 
-            
+def top3_accuracyV(accuracies, name, path):
+    
+    # Accuracy 그래프
+    plt.figure(figsize=(8, 5))
+    plt.plot(range(len(accuracies)), accuracies, label='Top3 Accuracy')  # accuracies 리스트가 필요합니다.
+    plt.xlabel('Epochs')
+    plt.ylabel('Top3 Accuracy')
+    plt.title('Top3 Accuracy Over Epochs')
+    plt.legend()
+    
+
+        # 그래프 저장을 시도하고, 실패할 경우 대체 경로를 시도함
+    try:
+        # 주피터 노트북에서 실행하는 경우
+        save_dir = Path('result/{}'.format(path))
+        save_dir.mkdir(parents=True, exist_ok=True)
+        plt.savefig(f'result/{path}/{name}_Top3_accuracy.png')
+        plt.show()
+        print("Top3 Accuracy graph saved successfully.")
+
+    except FileNotFoundError:
+        print("Error: Failed to save top3 accuracy graph.")         
 
 def Accuracy_CM_V(model, loader, name, path):
     # 모든 예측과 레이블을 저장할 리스트 초기화
