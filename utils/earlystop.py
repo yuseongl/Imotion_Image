@@ -16,14 +16,14 @@ class EarlyStopper:
         self.min_delta = min_delta
         self.counter = 0
         self.save_counter = 0
-        self.min_validation_loss = float('inf')
+        self.max_acc = 0.
 
-    def early_stop(self, model, validation_loss:float, name='test.pth', mode=True):
-        if validation_loss < self.min_validation_loss:
+    def early_stop(self, model, acc:float, name='test.pth', mode=True):
+        if acc > self.max_acc:
             self.counter = 0
-            self.min_validation_loss = validation_loss
+            self.max_acc = acc
             torch.save(model.state_dict(), 'output_model/'+name)
-        elif validation_loss > (self.min_validation_loss + self.min_delta):
+        elif acc < (self.max_acc + self.min_delta):
             self.counter += 1  
             if self.counter >= self.patience and mode:
                 print('early stoper run!')
