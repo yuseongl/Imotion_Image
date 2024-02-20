@@ -6,6 +6,81 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 # 모델을 평가 모드로 설정
 
+def prf1V(f1s,precisions,recalls,c_f1s,c_precisions,c_recalls ,name, path):
+    classes = ['분노','불안','당황','기쁨','중립','상처','슬픔']
+    # 정밀도 그래프
+    plt.figure(figsize=(8, 5))
+    for i in range(len(c_precisions[0])):  # 각 클래스별로
+        plt.plot([p[i] for p in c_precisions], label=classes[i])
+    plt.plot(precisions, label='Average', linewidth=3, linestyle='dashed')
+    plt.title('Precision over epochs')
+    plt.xlabel('Epoch')
+    plt.ylabel('Precision')
+    plt.legend()
+
+    # 그래프 저장을 시도하고, 실패할 경우 대체 경로를 시도함
+    try:
+        # 주피터 노트북에서 실행하는 경우
+        save_dir = Path('result/{}'.format(path))
+        save_dir.mkdir(parents=True, exist_ok=True)
+        plt.savefig(f'result/{path}/{name}_Precision.png')
+        print("Precision graph saved successfully.")
+        plt.show()
+
+    except FileNotFoundError:
+        print("Error: Failed to save train and validation graph.")
+
+
+
+    # 재현율 그래프
+    plt.figure(figsize=(8, 5))
+    for i in range(len(c_recalls[0])):  # 각 클래스별로
+        plt.plot([r[i] for r in c_recalls],  label=classes[i])
+    plt.plot(recalls, label='Average', linewidth=3, linestyle='dashed')
+    plt.title('Recall over epochs')
+    plt.xlabel('Epoch')
+    plt.ylabel('Recall')
+    plt.legend()
+    # 그래프 저장을 시도하고, 실패할 경우 대체 경로를 시도함
+    try:
+        # 주피터 노트북에서 실행하는 경우
+        save_dir = Path('result/{}'.format(path))
+        save_dir.mkdir(parents=True, exist_ok=True)
+        plt.savefig(f'result/{path}/{name}_Recall.png')
+        print("Recall graph saved successfully.")
+        plt.show()
+
+    except FileNotFoundError:
+        print("Error: Failed to save train and validation graph.")
+
+
+
+    # F1 스코어 그래프
+    plt.figure(figsize=(8, 5))
+    for i in range(len(c_f1s[0])):  # 각 클래스별로
+        plt.plot([f[i] for f in c_f1s],  label=classes[i])
+    plt.plot(f1s, label='Average', linewidth=3, linestyle='dashed')
+    plt.title('F1 Score over epochs')
+    plt.xlabel('Epoch')
+    plt.ylabel('F1 Score')
+    plt.legend()
+    # 그래프 저장을 시도하고, 실패할 경우 대체 경로를 시도함
+    try:
+        # 주피터 노트북에서 실행하는 경우
+        save_dir = Path('result/{}'.format(path))
+        save_dir.mkdir(parents=True, exist_ok=True)
+        plt.savefig(f'result/{path}/{name}_F1 .png')
+        print("F1  graph saved successfully.")
+        plt.show()
+
+    except FileNotFoundError:
+        print("Error: Failed to save train and validation graph.")
+
+
+
+
+
+
 
 def trnV_loss(train_losses, val_losses, name, path):
     # Train Loss 그래프
@@ -15,7 +90,6 @@ def trnV_loss(train_losses, val_losses, name, path):
     plt.ylabel('Loss')
     plt.title('Train and Validation Loss Over Epochs')
     plt.legend()
-    plt.show()
     
 
     # 그래프 저장을 시도하고, 실패할 경우 대체 경로를 시도함
@@ -25,7 +99,8 @@ def trnV_loss(train_losses, val_losses, name, path):
         save_dir.mkdir(parents=True, exist_ok=True)
         plt.savefig(f'result/{path}/{name}_train_loss.png')
         print("Train and validation loss graph saved successfully.")
-        
+        plt.show()
+
     except FileNotFoundError:
         print("Error: Failed to save train and validation loss graph.")
 
@@ -36,7 +111,6 @@ def trnV_loss(train_losses, val_losses, name, path):
     plt.ylabel('Loss')
     plt.title('Train and Validation Loss Over Epochs')
     plt.legend()
-    plt.show()
 
     # 그래프 저장을 시도하고, 실패할 경우 대체 경로를 시도함
     try:
@@ -44,6 +118,8 @@ def trnV_loss(train_losses, val_losses, name, path):
         save_dir = Path('result/{}'.format(path))
         save_dir.mkdir(parents=True, exist_ok=True)
         plt.savefig(f'result/{path}/{name}_val_loss.png')
+        plt.show()
+
         print("Train and validation loss graph saved successfully.")
 
     except FileNotFoundError:
@@ -59,7 +135,7 @@ def accuracyV(accuracies, name, path):
     plt.ylabel('Accuracy')
     plt.title('Accuracy Over Epochs')
     plt.legend()
-    plt.show()
+    
 
         # 그래프 저장을 시도하고, 실패할 경우 대체 경로를 시도함
     try:
@@ -67,6 +143,7 @@ def accuracyV(accuracies, name, path):
         save_dir = Path('result/{}'.format(path))
         save_dir.mkdir(parents=True, exist_ok=True)
         plt.savefig(f'result/{path}/{name}_accuracy.png')
+        plt.show()
         print("Accuracy graph saved successfully.")
 
     except FileNotFoundError:

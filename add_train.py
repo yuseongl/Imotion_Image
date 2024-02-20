@@ -70,7 +70,7 @@ def main(config):
         pbar.set_postfix(trn_loss=train_loss,
                          val_loss=loss_val,
                          accuracy=accuracy)
-        early_stopper.early_stop(model, loss_val, config["model_type"]+'_best_model.pth')
+        early_stopper.early_stop(model, accuracy, config["model_type"]+'_best_model.pth')
     
 ######################################################
     #print('[Epoch: {:>4}] Train Loss = {:.9f}, Val Loss = {:.9f}, val Accuracy = {:.2f}%'.format(epoch + 1, train_loss, loss_val, accuracy))
