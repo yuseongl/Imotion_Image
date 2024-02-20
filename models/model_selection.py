@@ -39,6 +39,10 @@ def get_network(config):
     elif config == 'vit':
         from .ViT import vit
         net = vit()
+        
+    elif config == 'revit':
+        from .ReViT import revit
+        net = revit()
 
     else:
         raise NotImplementedError("the network name '{}' is not supported yet".format(config))
