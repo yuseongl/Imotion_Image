@@ -14,7 +14,8 @@ def emdata(batch_size = 4, size = 224):
     )
     
     batch_size = batch_size
-    dataset = torchvision.datasets.ImageFolder(root = './data/train_crop/image', transform=transform)
+    # dataset = torchvision.datasets.ImageFolder(root = './data/train_crop/image', transform=transform)
+    dataset = torchvision.datasets.ImageFolder(root = '/home/KDT-admin/14000_crop_landmark', transform=transform)
     # 데이터를 훈련 세트와 테스트 세트로 무작위로 나누기
 
     # 이미지 데이터와 레이블을 numpy 배열로 변환
@@ -52,7 +53,8 @@ def emdata_tst(batch_size = 4, size = 224):
     )
     
     batch_size = batch_size
-    dataset = torchvision.datasets.ImageFolder(root = './data/test/image', transform=transform)
+    # dataset = torchvision.datasets.ImageFolder(root = './data/test/image', transform=transform)
+    dataset = torchvision.datasets.ImageFolder(root = '/home/KDT-admin/test_set1000/image', transform=transform)
     # 데이터를 훈련 세트와 테스트 세트로 무작위로 나누기
 
     # DataLoader 생성

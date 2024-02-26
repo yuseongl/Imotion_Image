@@ -175,7 +175,7 @@ def top3_accuracyV(accuracies, name, path):
 def Accuracy_CM_V(model, loader, name, path):
     # 모든 예측과 레이블을 저장할 리스트 초기화
     classes = ['angry','anxiety','embarrass','happy','normal','pain','sad']
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    device = 'cuda:2' if torch.cuda.is_available() else 'cpu'
 
     all_preds = []
     all_labels = []
