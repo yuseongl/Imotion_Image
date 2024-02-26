@@ -44,6 +44,10 @@ def get_network(config):
         from .ReViT import revit
         net = revit()
 
+    elif config == 'ensemble':
+        from .Ensemble import Ensemble
+        net = Ensemble(2048,7,2048)
+
     else:
         raise NotImplementedError("the network name '{}' is not supported yet".format(config))
 

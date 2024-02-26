@@ -1,11 +1,11 @@
 {
-    "model_type" : "revit",
+    "model_type" : "ensemble",
     "batch_size": 256,
     "learning_rate": 0.0001,
-    "epochs": 310,
+    "epochs": 10,
     "resize" : 224,
     "patiece" : 10000,
-    "name" : "256_",
+    "name" : "32_LeakyReLU_310epoch_landmark_pretrained_learn",
     "scheduler":{
         "mode":"True",
         "T_0":10,

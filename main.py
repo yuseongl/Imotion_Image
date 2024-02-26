@@ -13,7 +13,7 @@ from torch.optim.lr_scheduler import CosineAnnealingWarmRestarts
 
 import os
 
-device = 'cuda' if torch.cuda.is_available() else 'cpu'
+device = 'cuda:2' if torch.cuda.is_available() else 'cpu'
 print(f'avaiable device : %s' % device)
 # for reproducibility
 from dataset.emdata import emdata, emdata_tst
@@ -22,7 +22,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 torch.manual_seed(777)
-if device == 'cuda':
+if device == 'cuda:2':
     torch.cuda.manual_seed_all(777)
 
 
