@@ -38,8 +38,8 @@ def main(config):
     # 데이터셋 로드 및 전처리
     classes = ['angry','anxiety','embarrass','happy','normal','pain','sad']
        
-    trainloader, valloader = emdata(config['batch_size'],config['resize']) # 8:1:1
-    # tstloader = emdata_tst(config['batch_size'],config['resize'])
+    trainloader, _ = emdata(config['batch_size'],config['resize']) # 8:1:1
+    valloader = emdata_tst(config['batch_size'],config['resize'])
     #1500x 1000 ~ 1480x1320 --> resize # 바꿔봐야 하는 거 (하이퍼 파라미터)
     #def emdata(batch_size = 32, size = 128): size가 resize를 의미함
 
@@ -82,6 +82,7 @@ def main(config):
         history['lr'].append(optimizer.param_groups[0]['lr'])
         if config['scheduler']["mode"]:
             scheduler.step(train_loss)
+        # loss_val, accuracy, all_labels, all_predictions, accuracy_top5 = evaluate(model, criterion, valloader, device)
         loss_val, accuracy, all_labels, all_predictions, accuracy_top5 = evaluate(model, criterion, valloader, device)
         history["val_losses"].append(loss_val)
         history["accuracies"].append(accuracy)

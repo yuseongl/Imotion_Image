@@ -13,7 +13,7 @@ from torch.optim.lr_scheduler import CosineAnnealingWarmRestarts
 
 import os
 
-device = 'cuda' if torch.cuda.is_available() else 'cpu'
+device = 'cuda:2' if torch.cuda.is_available() else 'cpu'
 print(f'avaiable device : %s' % device)
 # for reproducibility
 from dataset.emdata import emdata, emdata_tst
@@ -22,7 +22,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 torch.manual_seed(777)
-if device == 'cuda':
+if device == 'cuda:2':
     torch.cuda.manual_seed_all(777)
 
 
@@ -67,12 +67,12 @@ def main(config):
 #############################################################
     pbar = tqdm(range(config["epochs"]))
     for _ in pbar:  
-        train_loss = train(model,criterion,optimizer,valloader,device) #
+        train_loss = train(model,criterion,optimizer,trainloader,device) #
         checkpoint['train_losses'].append(train_loss)
         checkpoint['lr'].append(optimizer.param_groups[0]['lr'])
         if config['scheduler']["mode"]:
             scheduler.step(train_loss)
-        loss_val, accuracy, all_labels, all_predictions, accuracy_top5 = evaluate(model, criterion, valloader, device)
+        loss_val, accuracy, all_labels, all_predictions, accuracy_top5 = evaluate(model, criterion, tstloader, device)
         checkpoint['val_losses'].append(loss_val)
         checkpoint['accuracies'].append(accuracy)
         checkpoint["accuracies_top3"].append(accuracy_top5)
@@ -106,7 +106,7 @@ def main(config):
 
     # 학습된 모델 저장
     #torch.save(model.state_dict(), 'output_model/'+config["model_type"] + "_full_data_train.pth")
-    torch.save(checkpoint, 'output_model/'+config["model_type"] + '_' + config['name'] +"_last_model.pth")# 경로
+    torch.save(checkpoint, 'final/'+config["model_type"] + '_' + config['name'] +"_last_model.pth")# 경로
     
     print(checkpoint['train_losses'])
     
@@ -116,7 +116,7 @@ def main(config):
     prf1V(checkpoint["f1s"],checkpoint["precisions"],checkpoint["recalls"],
           checkpoint["c_f1s"],checkpoint["c_precisions"],checkpoint["c_recalls"],
           config['name'], config['model_type'])
-    df, fig, accuracy , class_acc = Accuracy_CM_V(model, valloader, config['name'], config['model_type'])
+    df, fig, accuracy , class_acc = Accuracy_CM_V(model, tstloader, config['name'], config['model_type'])
 
     # accuracy = acc(model, testloader)
     # print("---------------------------")

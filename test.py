@@ -39,7 +39,8 @@ def main(config):
     #1500x 1000 ~ 1480x1320 --> resize # 바꿔봐야 하는 거 (하이퍼 파라미터)
     #def emdata(batch_size = 32, size = 128): size가 resize를 의미함
 
-    checkpoint_loc = 'output_model/'+config["model_type"] + '_' + config['name'] +"_last_model.pth" # 경로
+    # checkpoint_loc = 'output_model/'+config["model_type"] + '_' + config['name'] +"_last_model.pth" # 경로
+    checkpoint_loc = 'output_model/'+"ensemble_32_LeakyReLU_310epoch_landmark_pretrained_learn_last_model.pth" # 경로
     checkpoint = torch.load(checkpoint_loc)  
 
     model = get_network(config["model_type"]).to(device)
