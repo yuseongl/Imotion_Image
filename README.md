@@ -57,8 +57,13 @@ test_set1000/label - 감정별 라벨링된 JSON 파일
 ### EDA
 - YOLOv8 모델 중 얼굴 탐지만 전문적으로 학습한 모델을 활용하여 얼굴을 crop
 - 링크(https://github.com/akanametov/yolov8-face)
+- **해당 과정 모식도**
+![image](https://github.com/lily39910/Imotion_Image/assets/92513469/29322451-72cb-4464-b980-06333d840e40)
 
-데이터셋의 배경 때문에 학습 accuracy가 낮게 나와, 데이터셋 train 이미지들을 얼굴만 crop
+
+- dlib 활용하여 얼굴 랜드마크 추가 진행
+- **해당 과정 모식도**
+![image](https://github.com/lily39910/Imotion_Image/assets/92513469/64537c48-059c-4344-b55a-a78a0df2f5e5)
 
 
 
