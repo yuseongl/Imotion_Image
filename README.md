@@ -50,8 +50,13 @@ test_set1000/label - 감정별 라벨링된 JSON 파일
 ```
 
 
+### DataSet
+![image](https://github.com/lily39910/Imotion_Image/assets/92513469/cef83e1f-4823-4fc2-9296-1a0a2941b462)
+
+
 ### EDA
 데이터셋의 배경 때문에 학습 accuracy가 낮게 나와, 데이터셋 train 이미지들을 얼굴만 crop
+
 
 
 
