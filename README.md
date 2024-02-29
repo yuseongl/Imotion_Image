@@ -95,3 +95,10 @@ $ python test.py
 # streamlit을 이용하여 Web에서 모델을 적용한 기능들을 확인 가능하다.
 $ streamlit run stream.py
 ```
+
+```
+# stream.py
+# Google API key
+# 직접 Gemini api_key 입력하기(298Line)
+st.session_state.api_key = ''
+```
