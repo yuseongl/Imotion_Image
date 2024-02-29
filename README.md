@@ -91,6 +91,7 @@ $ python test.py
 ```
 
 ### 시각적으로 모델을 적용한 기능 활용
+<a href='https://support.gemini.com/hc/en-us'>Google API key 발급</a>
 ```
 # stream.py
 # Google API key
